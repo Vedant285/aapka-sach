@@ -1,4 +1,14 @@
-import post from './post'
-import webStory from './webStory'
+import { type SchemaTypeDefinition } from 'sanity'
 
-export const schemaTypes = [post, webStory]
+// Import your schemas from the same folder
+import post from './post'
+import webStory from './webStory' 
+// import category from './category' // Uncomment if you have this file
+
+export const schema: { types: SchemaTypeDefinition[] } = {
+  types: [
+    post,
+    webStory,
+    // category,
+  ],
+}
