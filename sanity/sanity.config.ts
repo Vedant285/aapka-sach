@@ -1,17 +1,16 @@
-// sanity.config.ts
+
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {apiVersion, dataset, projectId} from './env'
-import {schema} from './schemaTypes'    // <--- use `schema` (matches your file)
+import {schema} from './schemaTypes'
 import {structure} from './structure'
 
 export default defineConfig({
   name: 'default',
-  title: 'tv10-news',
-
-  projectId,
-  dataset,
+  title: 'Aapka Sach',
+  projectId: 'g1o8uwxq',
+  dataset: 'production',
   apiVersion,
 
   plugins: [
@@ -19,6 +18,5 @@ export default defineConfig({
     visionTool({ defaultApiVersion: apiVersion })
   ],
 
-  // `schema` already has shape { types: SchemaTypeDefinition[] }
   schema,
 })

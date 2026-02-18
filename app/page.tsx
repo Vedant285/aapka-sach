@@ -1,14 +1,14 @@
-import { client } from "@/lib/sanity";
+import { client } from "@/sanity/lib/sanity"; // Check this import path
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import StateTabs from "@/components/StateTabs";
 import WebStories from "@/components/WebStories";
-import Footer from "@/components/Footer"; 
 import DharmaSection from "@/components/DharmaSection";
 import VideoSection from "@/components/VideoSection";
 import MysterySection from "@/components/MysterySection";
+import Footer from "@/components/Footer";
 
-// Updated Query to fetch @/components/MysterySectionicates
+// Updated Query to fetch data
 async function getData() {
   const query = `{
     "news": *[_type == "post"] | order(publishedAt desc) {
@@ -21,7 +21,7 @@ async function getData() {
       publishedAt
     },
     "stories": *[_type == "webStory"] | order(_createdAt desc) [0...6] {
-      _id, title, slides
+      _id, title, slides, coverImage
     }
   }`;
   
@@ -41,7 +41,10 @@ export default async function Home() {
   const newsWithoutHero = news.filter((item: any) => item._id !== mainStoryId);
 
   return (
-    <main className="min-h-screen bg-tv10-cream dark:bg-tv10-dark">
+    // FIX: Explicitly set background colors here
+    // Light Mode: bg-gray-50 (Clean White/Grey)
+    // Dark Mode: dark:bg-[#0a0a0a] (Deep Dark Grey - NOT Blue, NOT White)
+    <main className="min-h-screen bg-gray-50 dark:bg-[#0a0a0a] transition-colors duration-300">
       <Header />
       
       {/* 1. VISUAL STORIES */}
@@ -58,7 +61,8 @@ export default async function Home() {
       <VideoSection news={news} />
 
       <MysterySection news={news} />
-
+      
+      
     </main>
   );
 }

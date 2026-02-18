@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { urlFor } from "@/lib/sanity";
+import { urlFor } from "../sanity/lib/sanity";
 import { FaEye } from "react-icons/fa";
 
 export default function MysterySection({ news }: { news: any[] }) {

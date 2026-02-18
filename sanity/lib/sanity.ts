@@ -2,7 +2,7 @@ import { createClient } from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
 
 // 1. HARDCODED CONFIGURATION (Bypasses the missing file error)
-export const projectId = 'uh81euwc'
+export const projectId = 'g1o8uwxq'
 export const dataset = 'production'
 export const apiVersion = '2024-01-01'
 

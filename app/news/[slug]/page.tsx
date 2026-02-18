@@ -1,12 +1,10 @@
-import { client, urlFor } from "@/lib/sanity";
+import { client, urlFor } from "../../../sanity/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Link from "next/link";
 import AdBanner from "@/components/AdBanner"; 
-import AudioPlayer from "@/components/AudioPlayer";
-import NewsCard from "@/components/NewsCard"; // Ensure this is imported
-import { FaYoutube, FaWhatsapp, FaShareAlt, FaClock, FaFire, FaLayerGroup } from "react-icons/fa";
+import { FaYoutube, FaWhatsapp, FaClock, FaFire, FaLayerGroup } from "react-icons/fa";
 
 // 1. RICH TEXT STYLING
 const RichTextComponents = {
@@ -14,7 +12,6 @@ const RichTextComponents = {
     h1: ({ children }: any) => <h1 className="text-3xl font-bold mt-8 mb-4 text-tv10-metal dark:text-white">{children}</h1>,
     h2: ({ children }: any) => <h2 className="text-2xl font-bold mt-8 mb-4 border-l-4 border-tv10-red pl-3 text-tv10-metal dark:text-tv10-gold">{children}</h2>,
     h3: ({ children }: any) => <h3 className="text-xl font-bold mt-6 mb-3 text-gray-800 dark:text-gray-200">{children}</h3>,
-    h4: ({ children }: any) => <h4 className="text-lg font-bold mt-4 mb-2">{children}</h4>,
     normal: ({ children }: any) => <p className="mb-4 text-lg leading-relaxed text-gray-800 dark:text-gray-300 text-justify">{children}</p>,
     blockquote: ({ children }: any) => (
       <blockquote className="border-l-4 border-tv10-gold pl-4 italic text-xl text-gray-600 dark:text-gray-400 my-6 bg-gray-50 dark:bg-gray-800 p-4 rounded-r-lg">
@@ -23,16 +20,8 @@ const RichTextComponents = {
     ),
   },
   list: {
-    bullet: ({ children }: any) => (
-      <ul className="list-disc pl-10 mb-6 space-y-2 text-lg text-gray-800 dark:text-gray-300 marker:text-tv10-red">
-        {children}
-      </ul>
-    ),
-    number: ({ children }: any) => (
-      <ol className="list-decimal pl-10 mb-6 space-y-2 text-lg text-gray-800 dark:text-gray-300 marker:font-bold">
-        {children}
-      </ol>
-    ),
+    bullet: ({ children }: any) => <ul className="list-disc pl-10 mb-6 space-y-2 text-lg text-gray-800 dark:text-gray-300 marker:text-tv10-red">{children}</ul>,
+    number: ({ children }: any) => <ol className="list-decimal pl-10 mb-6 space-y-2 text-lg text-gray-800 dark:text-gray-300 marker:font-bold">{children}</ol>,
   },
   listItem: {
     bullet: ({ children }: any) => <li className="pl-1">{children}</li>,
@@ -42,11 +31,7 @@ const RichTextComponents = {
     strong: ({ children }: any) => <strong className="font-bold text-black dark:text-white">{children}</strong>,
     link: ({ children, value }: any) => {
       const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined;
-      return (
-        <a href={value.href} rel={rel} className="text-tv10-red hover:underline font-bold">
-          {children}
-        </a>
-      );
+      return <a href={value.href} rel={rel} className="text-tv10-red hover:underline font-bold">{children}</a>;
     },
   },
 };
@@ -56,7 +41,7 @@ async function getArticle(slug: string) {
   const query = `
     *[_type == "post" && slug.current == $slug][0] {
       title,
-      slug,        // <--- ADDED THIS LINE (Fixes the crash)
+      slug,
       mainImage,
       youtubeUrl,
       body,
@@ -70,8 +55,7 @@ async function getArticle(slug: string) {
       }
     }
   `;
-  const params = { slug: slug };
-  return client.fetch(query, params);
+  return client.fetch(query, { slug });
 }
 
 function getYouTubeId(url: string) {
@@ -145,14 +129,15 @@ export default async function ArticlePage({ params }: Props) {
                  <FaClock /> {new Date(post.publishedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
                </div>
                <div className="flex gap-2">
-                 <button className="bg-[#25D366] text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 hover:bg-green-600 transition">
+                 <a 
+                    href={`https://wa.me/?text=${encodeURIComponent(post.title + " " + (typeof window !== 'undefined' ? window.location.href : ''))}`}
+                    target="_blank"
+                    className="bg-[#25D366] text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 hover:bg-green-600 transition"
+                 >
                      <FaWhatsapp className="text-sm" /> Share
-                 </button>
+                 </a>
                </div>
             </div>
-
-            {/* --- AUDIO PLAYER --- */}
-            <AudioPlayer text={`${post.title}. ${post.body?.map((b:any) => b.children?.map((c:any) => c.text).join(' ')).join(' ')}`} />
 
             {/* 1. ALWAYS SHOW IMAGE FIRST */}
             {post.mainImage && (
@@ -190,17 +175,13 @@ export default async function ArticlePage({ params }: Props) {
           {/* RIGHT COLUMN: ADS & TRENDING */}
           <aside className="lg:col-span-3 space-y-6">
             
-            {/* --- AD SLOT 2: SIDEBAR TOP --- */}
             <AdBanner />
-
-            {/* --- WHATSAPP STATUS GENERATOR --- */}
-            <NewsCard post={post} />
 
             {/* Subscribe Box */}
             <div className="bg-tv10-red text-white p-4 rounded-xl shadow-md text-center">
               <div className="flex justify-center items-center gap-2 mb-2">
                 <FaYoutube className="text-2xl" />
-                <span className="font-bold">TV10 India</span>
+                <span className="font-bold">AAPKA SACH</span>
               </div>
               <p className="text-xs mb-3 opacity-90">Join 43,000+ Subscribers</p>
               <a href="https://www.youtube.com/@TV10India" target="_blank" className="block w-full bg-white text-tv10-red text-xs font-black px-4 py-2 rounded-full hover:bg-gray-100 transition">
@@ -208,7 +189,6 @@ export default async function ArticlePage({ params }: Props) {
               </a>
             </div>
 
-            {/* --- AD SLOT 3: SIDEBAR MIDDLE --- */}
             <AdBanner />
 
             {/* Trending News */}
@@ -220,12 +200,12 @@ export default async function ArticlePage({ params }: Props) {
                  {post.trendingNews?.map((item: any) => (
                    <Link href={`/news/${item.slug.current}`} key={item.slug.current} className="flex gap-3 group items-start">
                       <div className="w-16 h-12 relative flex-shrink-0 bg-gray-200 rounded-md overflow-hidden">
-                         {item.mainImage && <Image src={urlFor(item.mainImage).url()} alt="news" fill className="object-cover" />}
+                          {item.mainImage && <Image src={urlFor(item.mainImage).url()} alt="news" fill className="object-cover" />}
                       </div>
                       <div>
-                         <h4 className="text-xs font-bold leading-tight group-hover:text-tv10-red line-clamp-2 text-gray-800 dark:text-gray-200">
-                           {item.title}
-                         </h4>
+                          <h4 className="text-xs font-bold leading-tight group-hover:text-tv10-red line-clamp-2 text-gray-800 dark:text-gray-200">
+                            {item.title}
+                          </h4>
                       </div>
                    </Link>
                  ))}

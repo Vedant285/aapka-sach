@@ -2,21 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
+/* 1. GLOBAL RESET & THEME COLORS */
+@layer base {
+  /* LIGHT MODE DEFAULT */
+  body {
+    @apply bg-[#FAFAFA] text-[#1A1A1A] transition-colors duration-300;
+  }
+
+  /* DARK MODE DEFAULT - Forces Text to be White */
+  .dark body {
+    @apply bg-[#0f0f0f] text-[#e5e5e5]; 
+  }
+
+  /* Force Headings to be White in Dark Mode */
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    @apply text-white;
+  }
+  
+  /* Force Paragraphs to be Light Grey in Dark Mode */
+  .dark p {
+    @apply text-gray-300;
+  }
 }
 
-/* Default Light Mode (Cream Paper feel) */
-body {
-  color: #1A1A1A;
-  background: #FAFAFA;
-}
-
-/* Dark Mode Overrides */
-.dark body {
-  color: #FAFAFA;
-  background: #121212;
-}
+/* 2. UTILITIES */
 
 /* Hide Scrollbar for Web Stories */
 .scrollbar-hide::-webkit-scrollbar {
@@ -32,14 +41,13 @@ img {
   transition: opacity 0.3s ease-in-out;
 }
 
-/* HIDE GOOGLE TRANSLATE BANNER */
+/* 3. GOOGLE TRANSLATE HIDING (Keep this to prevent layout shifts) */
 .skiptranslate {
   display: none !important;
 }
 body {
   top: 0 !important;
 }
-/* Ensure our hidden div stays hidden */
 #google_translate_element {
   display: none;
 }

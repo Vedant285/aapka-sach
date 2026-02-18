@@ -24,12 +24,12 @@ export default function Footer() {
                   <img src="/logo.png" alt="TV10" className="object-cover w-full h-full" />
                </div>
                <div>
-                 <h2 className="text-2xl font-black text-white leading-none tracking-tighter">TV10 INDIA</h2>
+                 <h2 className="text-2xl font-black text-white leading-none tracking-tighter">AAPKA SACH</h2>
                  <p className="text-[10px] text-tv10-gold font-bold uppercase tracking-widest">The Spiritual Voice</p>
                </div>
             </div>
             <p className="text-sm leading-relaxed text-gray-400 mb-6">
-              TV10 India is Bharat's leading digital news platform dedicated to bringing you the truth from Uttar Pradesh, Uttarakhand, and the world of Dharma.
+              AAPKA SACH is Bharat's leading digital news platform dedicated to bringing you the truth from Uttar Pradesh, Uttarakhand, and the world of Dharma.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition duration-300">
@@ -95,7 +95,7 @@ export default function Footer() {
 
         {/* BOTTOM BAR */}
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-          <p>&copy; {new Date().getFullYear()} TV10 India Media Pvt Ltd. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} AAPKA SACH Media Pvt Ltd. All rights reserved.</p>
           <p className="mt-2 md:mt-0">
             Designed with <span className="text-red-500">♥</span> for Bharat
           </p>

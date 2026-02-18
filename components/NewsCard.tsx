@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import { FaWhatsapp, FaSpinner, FaExclamationTriangle } from "react-icons/fa";
-import { urlFor } from "@/lib/sanity";
+import { urlFor } from "../sanity/lib/sanity";
 
 export default function NewsCard({ post }: { post: any }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -88,7 +88,7 @@ export default function NewsCard({ post }: { post: any }) {
             {/* LOGO */}
             <div className="relative z-10 p-10 flex justify-center pt-32">
                <div className="bg-tv10-red text-white px-10 py-4 rounded-full font-black text-5xl shadow-2xl border-4 border-white tracking-tighter">
-                  TV10 INDIA
+                  AAPKA SACH
                </div>
             </div>
 

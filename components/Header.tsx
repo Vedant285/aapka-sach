@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaSearch, FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
-import LanguageToggle from "@/components/LanguageToggle"; // Ensure this is imported
 
 export default function Header() {
   const [darkMode, setDarkMode] = useState(false);
@@ -38,84 +37,75 @@ export default function Header() {
     }
   };
 
-  const menuItems = ['HOME', 'UTTAR PRADESH', 'UTTARAKHAND', 'DELHI', 'DHARMA', 'BUSINESS', 'SPORTS', 'VIDEOS'];
+  const menuItems = ['HOME', 'UTTAR PRADESH', 'UTTARAKHAND', 'DELHI', 'DHARMA', 'BUSINESS', 'SPORTS', 'LIFESTYLE'];
 
   return (
-    <header className="sticky top-0 z-50 shadow-xl">
+    <header className="sticky top-0 z-50 shadow-lg font-sans">
       
-      {/* 1. TOP BAR (Date & Ticker) */}
-      <div className="bg-tv10-metal text-white text-xs font-bold py-1 px-4 flex justify-between items-center border-b border-gray-600">
-        <div className="hidden md:block opacity-80">{today}</div>
+      {/* 1. TOP TICKER */}
+      <div className="bg-brand-blue dark:bg-[#1a1a1a] text-white text-xs font-bold py-1.5 px-4 flex justify-between items-center border-b border-white/10 dark:border-gray-700 transition-colors duration-300">
+        <div className="hidden md:block opacity-90 text-brand-gold">{today}</div>
         <div className="flex-1 mx-4 overflow-hidden relative group">
-           <div className="whitespace-nowrap animate-ticker inline-block text-tv10-gold">
-              🔴 BREAKING: Welcome to the new TV10 India Digital Platform...
+           <div className="whitespace-nowrap animate-ticker inline-block">
+              <span className="bg-brand-red text-white px-2 py-0.5 rounded-sm mr-2 shadow-sm">BREAKING</span>
+              Welcome to Aapka Sach Digital - The True Voice of Bharat...
            </div>
         </div>
       </div>
 
-      {/* 2. MAIN BRAND BAR (GOLD BACKGROUND) */}
-      <div className="bg-tv10-gold py-3 px-4 md:px-8 flex justify-between items-center shadow-md relative z-20">
+      {/* 2. MAIN LOGO AREA */}
+      <div className="bg-white dark:bg-[#222222] py-4 px-4 md:px-8 flex justify-between items-center relative z-20 transition-colors duration-300">
         
         {/* LOGO AREA */}
-        <Link href="/" className="flex items-center gap-2 md:gap-3">
-          {/* Logo Container */}
-          <div className="h-10 w-10 md:h-14 md:w-14 rounded-full overflow-hidden shrink-0">
-             <img src="/logo.png" alt="TV10" className="object-cover w-full h-full" />
+        <Link href="/" className="flex items-center gap-3">
+          {/* IMAGE LOGO */}
+          <div className="h-16 w-16 md:h-20 md:w-20 relative shrink-0">
+             <img src="/logo.png" alt="Aapka Sach" className="object-contain w-full h-full drop-shadow-lg" />
           </div>
           
-          {/* Text Logo */}
-          <div className="hidden md:block">
-            <h1 className="text-4xl font-black tracking-tighter text-black leading-none drop-shadow-sm">
-              TV10 <span className="text-white text-stroke">INDIA</span>
-            </h1>
-            <p className="text-[10px] text-tv10-metal font-bold uppercase tracking-widest">
-              The Spiritual Voice of Bharat
-            </p>
-          </div>
-          {/* Mobile Text Logo (Smaller) */}
-          <div className="md:hidden">
-            <h1 className="text-2xl font-black tracking-tighter text-black leading-none">
-              TV10 INDIA
-            </h1>
+          {/* TEXT LOGO */}
+          <div className="flex flex-col justify-center leading-none">
+            {/* AAPKA */}
+            <div className="bg-gradient-to-r from-brand-red to-red-600 text-white font-black text-xl md:text-3xl px-2 py-0.5 rounded-sm transform -skew-x-12 shadow-md inline-block w-fit mb-1">
+               AAPKA
+            </div>
+            {/* SACH */}
+            <div className="bg-gradient-to-r from-brand-blue to-blue-800 dark:from-gray-700 dark:to-gray-800 text-white font-black text-2xl md:text-4xl px-2 py-0.5 rounded-sm transform -skew-x-12 shadow-md ml-4 border border-white/20">
+               SACH
+            </div>
           </div>
         </Link>
 
         {/* CONTROLS */}
-        <div className="flex items-center gap-2 md:gap-4">
+        <div className="flex items-center gap-3 md:gap-5">
           
-          {/* 1. LANGUAGE SWITCHER (Now visible on Mobile) */}
-          {/* Scaled down slightly (90%) on mobile to save space */}
-          <div className="scale-90 md:scale-100">
-             <LanguageToggle />
-          </div>
-
-          {/* Search Bar (Hidden on Mobile) */}
-          <div className="hidden md:flex items-center bg-white/30 backdrop-blur-md rounded-full px-4 py-2 border border-black/10 shadow-inner">
+          {/* Search Bar - FIXED VISIBILITY */}
+          <div className="hidden md:flex items-center bg-gray-100 dark:bg-[#333] rounded-full px-4 py-2 border border-gray-300 dark:border-gray-600 focus-within:ring-2 ring-brand-blue/20 dark:ring-white/20">
             <input 
               type="text" 
-              placeholder="Search news..." 
-              className="bg-transparent outline-none text-sm text-black placeholder-black/60 w-32 focus:w-48 transition-all font-semibold"
+              placeholder="Search..." 
+              className="bg-transparent outline-none text-sm text-gray-900 dark:text-white w-32 focus:w-48 transition-all font-bold placeholder-gray-500 dark:placeholder-gray-400"
             />
-            <FaSearch className="text-black/60" />
+            <FaSearch className="text-brand-blue dark:text-white" />
           </div>
 
           {/* Theme Toggle */}
           <button 
             onClick={toggleTheme} 
-            className="p-2 rounded-full bg-white text-tv10-metal hover:bg-black hover:text-tv10-gold transition shadow-lg shrink-0"
+            className="p-2.5 rounded-full bg-gray-50 dark:bg-[#333] text-brand-blue dark:text-yellow-400 hover:bg-brand-blue hover:text-white transition shadow-sm shrink-0 border border-gray-200 dark:border-gray-600"
           >
-            {darkMode ? <FaSun className="text-sm md:text-base" /> : <FaMoon className="text-sm md:text-base" />}
+            {darkMode ? <FaSun /> : <FaMoon />}
           </button>
 
           {/* Mobile Menu Icon */}
-          <button className="md:hidden text-2xl text-black shrink-0 ml-1" onClick={() => setMenuOpen(!menuOpen)}>
+          <button className="md:hidden text-2xl text-brand-blue dark:text-white shrink-0 ml-1" onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
       </div>
 
       {/* 3. NAVIGATION MENU */}
-      <nav className={`bg-tv10-metal text-white font-semibold text-sm ${menuOpen ? 'block' : 'hidden md:block'} border-t-4 border-tv10-red`}>
+      <nav className={`bg-brand-blue dark:bg-[#1a1a1a] text-white font-bold text-sm ${menuOpen ? 'block' : 'hidden md:block'} shadow-xl border-t-4 border-brand-gold transition-colors duration-300`}>
         <ul className="container mx-auto flex flex-col md:flex-row md:justify-center">
           {menuItems.map((item) => {
             const linkUrl = item === 'HOME' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`;
@@ -123,8 +113,8 @@ export default function Header() {
               <li key={item}>
                 <Link 
                   href={linkUrl} 
-                  onClick={() => setMenuOpen(false)} // Close menu on click
-                  className="block py-3 px-6 hover:bg-tv10-red transition-colors uppercase tracking-wide text-center"
+                  onClick={() => setMenuOpen(false)} 
+                  className="block py-3 px-6 hover:bg-white hover:text-brand-red dark:hover:bg-[#333] dark:hover:text-brand-gold transition-all duration-300 uppercase tracking-wider text-center border-b border-blue-800 dark:border-gray-800 md:border-b-0"
                 >
                   {item}
                 </Link>

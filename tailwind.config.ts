@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: 'class', // Enables the Dark/Light toggle
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,29 +10,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        tv10: {
-          gold: '#FFC107',    // Bright Yellow (Map color)
-          red: '#D32F2F',     // Deep Red (Play Button/Live)
-          metal: '#37474F',   // Dark Grey ring (Header/Footer)
-          silver: '#CFD8DC',  // Light Grey (Borders)
-          cream: '#FAFAFA',   // Light Mode Background (Paper feel)
-          dark: '#121212',    // Dark Mode Background
-        },
-      },
-      fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
+        // LOGO COLORS
+        "brand-blue": "#00308F", // The Deep Blue from the Globe/SACH
+        "brand-red": "#D00000",  // The Red from AAPKA
+        "brand-gold": "#FFB800", // The Gold Swoosh (for accents)
+        "brand-dark": "#0a0a0a",
+        
+        // MAPPINGS FOR OLD CODE (Prevents crashes)
+        "tv10-gold": "#FFB800",  
+        "tv10-metal": "#00308F", 
+        "tv10-red": "#D00000",
+        "tv10-cream": "#f4f4f4",
       },
       animation: {
-        'ticker': 'ticker 30s linear infinite',
+        ticker: "ticker 30s linear infinite",
       },
       keyframes: {
         ticker: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        }
-      }
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 export default config;
