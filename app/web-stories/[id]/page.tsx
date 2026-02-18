@@ -1,4 +1,4 @@
-import { client, urlFor } from "../sanity/lib/sanity";
+import { client, urlFor } from "@/sanity/lib/sanity"; 
 import Image from "next/image";
 import Link from "next/link";
 import { FaTimes, FaArrowRight, FaArrowLeft } from "react-icons/fa";
