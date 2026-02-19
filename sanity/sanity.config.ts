@@ -1,10 +1,8 @@
-// sanity.config.ts
-
 import { defineConfig } from 'sanity'
-import { structureTool } from 'sanity/structure'   // ✅ FIXED
+import { structureTool } from './structure'   
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemaTypes/index'
-import { structure } from './structure'            // ✅ import your custom structure
+import { structure } from './structure'            
 import { projectId, dataset } from './lib/sanity'
 
 export default defineConfig({
