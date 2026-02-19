@@ -9,11 +9,6 @@ async function getStory(id: string) {
   return client.fetch(query, { id });
 }
 
-// 2. Client Component Wrapper (To handle clicks)
-// Since this is a server component, we will implement a simple CSS scroll snap 
-// or basic interactivity. For full "Tap" logic, we usually use a client component.
-// Here is a "No-Code" friendly version using CSS Scroll Snap (Simplest & Fastest).
-
 type Props = {
   params: Promise<{ id: string }>;
 }
