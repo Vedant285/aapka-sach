@@ -1,6 +1,6 @@
 import { defineConfig } from 'sanity'
 // 1. IMPORT FROM THE LIBRARY (The code that makes the sidebar work)
-import { structureTool } from 'sanity/structure' 
+import { structureTool } from '../sanity/node_modules/sanity/lib/structure' 
 import { visionTool } from '@sanity/vision'
 
 // 2. IMPORT FROM YOUR FOLDERS (Your custom news layout)
