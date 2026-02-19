@@ -1,7 +1,10 @@
 import { defineConfig } from 'sanity'
-import { structureTool } from 'sanity/structure' // ✅ FIXED: Import from 'sanity/structure'
+// 1. IMPORT FROM THE LIBRARY (The code that makes the sidebar work)
+import { structureTool } from 'sanity/structure' 
 import { visionTool } from '@sanity/vision'
-import { schemaTypes } from './schemaTypes' 
+
+// 2. IMPORT FROM YOUR FOLDERS (Your custom news layout)
+import { schemaTypes } from './schemaTypes'
 import { structure } from './structure' 
 import { projectId, dataset } from './lib/sanity'
 
@@ -11,7 +14,8 @@ export default defineConfig({
   dataset,
 
   plugins: [
-    structureTool({ structure }), // ✅ This uses the imported tool with your custom structure
+    // We use the library tool and pass your custom structure into it
+    structureTool({ structure }), 
     visionTool({ defaultApiVersion: '2024-01-01' }),
   ],
 
