@@ -1,8 +1,8 @@
 import { defineConfig } from 'sanity'
-import { structureTool } from './structure'   
+import { structureTool } from 'sanity/structure' // ✅ FIXED: Import from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
-import { schemaTypes } from './schemaTypes/index'
-import { structure } from './structure'            
+import { schemaTypes } from './schemaTypes' 
+import { structure } from './structure' 
 import { projectId, dataset } from './lib/sanity'
 
 export default defineConfig({
@@ -11,7 +11,7 @@ export default defineConfig({
   dataset,
 
   plugins: [
-    structureTool({ structure }), 
+    structureTool({ structure }), // ✅ This uses the imported tool with your custom structure
     visionTool({ defaultApiVersion: '2024-01-01' }),
   ],
 

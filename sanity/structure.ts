@@ -1,4 +1,3 @@
-// sanity/structure.ts
 import type {StructureBuilder} from 'sanity/structure'
 
 export const structure = (S: StructureBuilder) =>
