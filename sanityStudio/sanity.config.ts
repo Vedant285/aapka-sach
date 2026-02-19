@@ -1,21 +1,26 @@
+'use client'
+
 import { defineConfig } from 'sanity'
-import { structureTool } from 'sanity/structure' 
+import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
-import { structure } from './structure' 
-import { projectId, dataset } from './lib/sanity'
+
+// Import from your local folders
+import { schema } from './schemaTypes'
+import { structure } from './structure'
 
 export default defineConfig({
+  name: 'default',
+  title: 'Aapka Sach Admin',
   basePath: '/studio',
-  projectId,
-  dataset,
+
+  // Use environment variables or hardcode for testing if needed
+  projectId: 'g1o8uwxq', 
+  dataset: 'production',
 
   plugins: [
-    structureTool({ structure }), 
+    structureTool({ structure }),
     visionTool({ defaultApiVersion: '2024-01-01' }),
   ],
 
-  schema: {
-    types: schemaTypes,
-  },
+  schema: schema,
 })
