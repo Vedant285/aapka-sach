@@ -3,7 +3,6 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 
-// ✅ Use ./ because these files are in the SAME folder
 import { schema } from './schemaTypes' 
 import { structure } from './structure'
 
