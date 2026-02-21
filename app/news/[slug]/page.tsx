@@ -183,7 +183,7 @@ export default async function ArticlePage({ params }: Props) {
                 <FaYoutube className="text-2xl" />
                 <span className="font-bold">AAPKA SACH</span>
               </div>
-              <p className="text-xs mb-3 opacity-90">Join 43,000+ Subscribers</p>
+              <p className="text-xs mb-3 opacity-90">Join 10,000+ Subscribers</p>
               <a href="https://www.youtube.com/@TV10India" target="_blank" className="block w-full bg-white text-tv10-red text-xs font-black px-4 py-2 rounded-full hover:bg-gray-100 transition">
                 SUBSCRIBE NOW
               </a>
