@@ -86,7 +86,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <FaEnvelope className="text-tv10-red" />
-                <span>editor@tv10india.com</span>
+                <span>editor@aapkasach.com</span>
               </li>
             </ul>
           </div>
