@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { urlFor } from "../sanity/lib/sanity"; // Ensure this path is correct for your setup
+import { urlFor } from "../sanityStudio/lib/client"; // Ensure this path is correct for your setup
 import { FaBolt } from "react-icons/fa";
 import Link from "next/link";
 

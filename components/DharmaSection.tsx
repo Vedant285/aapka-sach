@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { urlFor } from "../sanity/lib/sanity";
+import { client, urlFor } from '../sanityStudio/lib/client';
 import { FaOm, FaStar } from "react-icons/fa";
 
 export default function DharmaSection({ news }: { news: any[] }) {

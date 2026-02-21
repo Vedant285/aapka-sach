@@ -1,4 +1,4 @@
-import { client, urlFor } from "../../sanity/lib/sanity"; // Check path if needed
+import { client, urlFor } from "../../sanityStudio/lib/sanity"; // Check path if needed
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
