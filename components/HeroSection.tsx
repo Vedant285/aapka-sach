@@ -8,7 +8,8 @@ type HeroNewsItem = {
   title: string;
   slug: { current: string };
   category?: string;
-  mainImage?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mainImage?: any;
   youtubeUrl?: string;
   publishedAt?: string;
 };
@@ -98,7 +99,7 @@ export default function HeroSection({ news }: { news: HeroNewsItem[] }) {
                   {mainStory.title}
                 </h1>
                 <div className="flex items-center text-gray-300 text-xs gap-3">
-                  <span className="flex items-center gap-1"><FaClock /> {new Date(mainStory.publishedAt).toDateString()}</span>
+                  <span className="flex items-center gap-1"><FaClock /> {mainStory.publishedAt ? new Date(mainStory.publishedAt).toDateString() : ""}</span>
                 </div>
               </div>
             </div>
