@@ -63,14 +63,13 @@ export default function StateTabs({ news }: { news: any[] }) {
     <section className="container mx-auto px-4 py-12">
       
       {/* SECTION HEADER + TABS */}
-      <div className="flex flex-col md:flex-row items-center justify-between border-b-2 border-gray-200 dark:border-gray-700 mb-8 pb-4">
-        <h3 className="text-3xl font-black text-tv10-metal dark:text-white uppercase tracking-tighter flex items-center gap-2 mb-4 md:mb-0">
+      <div className="border-b-2 border-gray-200 dark:border-gray-700 mb-8 pb-4">
+        <h3 className="text-3xl font-black text-tv10-metal dark:text-white uppercase tracking-tighter flex items-center gap-2 mb-4">
           <FaMapMarkerAlt className="text-tv10-red" />
           Pradesh <span className="text-gray-400">Samachar</span>
         </h3>
-        
-        {/* THE TABS */}
-        <div className="flex gap-3 overflow-x-auto w-full md:w-auto scrollbar-hide pb-1">
+        {/* THE TABS — full width row */}
+        <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-1">
           {tabs.map((tab) => (
             <button
               key={tab.id}
