@@ -5,7 +5,13 @@ import Link from "next/link";
 import { FaSearch, FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
 
 export default function Header() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return (
+      localStorage.getItem("theme")  === "dark" ||
+      (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
+  });
   const [menuOpen, setMenuOpen] = useState(false);
   
   // Date Logic
@@ -13,31 +19,17 @@ export default function Header() {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
-  // Dark Mode Logic
+  // Keep DOM theme class and localStorage synced with React state.
   useEffect(() => {
-    if (localStorage.getItem('theme') === 'dark' || 
-       (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setDarkMode(true);
-      document.documentElement.classList.add('dark');
-    } else {
-      setDarkMode(false);
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   const toggleTheme = () => {
-    if (darkMode) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setDarkMode(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setDarkMode(true);
-    }
+    setDarkMode((prev) => !prev);
   };
 
-  const menuItems = ['HOME', 'UTTAR PRADESH', 'UTTARAKHAND', 'DELHI', 'DHARMA', 'BUSINESS', 'SPORTS', 'LIFESTYLE'];
+  const menuItems = ['HOME', 'UTTAR PRADESH', 'UTTARAKHAND', 'DELHI', 'DHARMA', 'BUSINESS', 'SPORTS', 'LIFESTYLE', 'OTHERS'];
 
   return (
     <header className="sticky top-0 z-50 shadow-lg font-sans">
@@ -48,7 +40,7 @@ export default function Header() {
         <div className="flex-1 mx-4 overflow-hidden relative group">
            <div className="whitespace-nowrap animate-ticker inline-block">
               <span className="bg-brand-red text-white px-2 py-0.5 rounded-sm mr-2 shadow-sm">BREAKING</span>
-              Welcome to Aapka Sach Digital - The True Voice of Bharat...
+              Breaking headlines from Uttar Pradesh, Uttarakhand, Delhi, and beyond.
            </div>
         </div>
       </div>
