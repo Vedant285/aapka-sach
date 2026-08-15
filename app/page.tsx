@@ -1,4 +1,4 @@
-import { client } from "../sanityStudio/lib/client"; // Check this import path
+import { client } from "../sanityStudio/lib/client";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import StateTabs from "@/components/StateTabs";
@@ -6,7 +6,17 @@ import WebStories from "@/components/WebStories";
 import DharmaSection from "@/components/DharmaSection";
 import VideoSection from "@/components/VideoSection";
 import MysterySection from "@/components/MysterySection";
-import Footer from "@/components/Footer";
+import CategoryNewsSection from "@/components/CategoryNewsSection";
+
+type HomeNewsItem = {
+  _id: string;
+  category?: string;
+  publishedAt?: string;
+  slug?: { current?: string };
+  title?: string;
+  mainImage?: unknown;
+  youtubeUrl?: string;
+};
 
 // Updated Query to fetch data
 async function getData() {
@@ -38,7 +48,7 @@ export default async function Home() {
 
   // 2. Create a "Clean List" for the bottom sections
   // This removes the Main Story from the State Tabs so it doesn't repeat
-  const newsWithoutHero = news.filter((item: any) => item._id !== mainStoryId);
+  const newsWithoutHero = (news as HomeNewsItem[]).filter((item) => item._id !== mainStoryId);
 
   return (
     // FIX: Explicitly set background colors here
@@ -55,6 +65,34 @@ export default async function Home() {
 
       {/* 3. STATE TABS (Uses the clean list, so #1 story won't repeat here) */}
       <StateTabs news={newsWithoutHero} />
+
+      <CategoryNewsSection
+        title="Business Stories"
+        categorySlug="business"
+        categories={["business"]}
+        news={newsWithoutHero}
+      />
+
+      <CategoryNewsSection
+        title="Sports Stories"
+        categorySlug="sports"
+        categories={["sports"]}
+        news={newsWithoutHero}
+      />
+
+      <CategoryNewsSection
+        title="Lifestyle Stories"
+        categorySlug="lifestyle"
+        categories={["lifestyle"]}
+        news={newsWithoutHero}
+      />
+
+      <CategoryNewsSection
+        title="Mythological Stories"
+        categorySlug="dharma"
+        categories={["dharma", "mystery"]}
+        news={newsWithoutHero}
+      />
 
       <DharmaSection news={news} />
 
