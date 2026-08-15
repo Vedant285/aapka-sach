@@ -1,4 +1,4 @@
-import { client } from "../sanityStudio/lib/client";
+import { client } from "../sanityStudio/lib/client"; // Check this import path
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import StateTabs from "@/components/StateTabs";
@@ -70,28 +70,28 @@ export default async function Home() {
         title="Business Stories"
         categorySlug="business"
         categories={["business"]}
-        news={newsWithoutHero}
+        news={news}
       />
 
       <CategoryNewsSection
         title="Sports Stories"
         categorySlug="sports"
         categories={["sports"]}
-        news={newsWithoutHero}
+        news={news}
       />
 
       <CategoryNewsSection
         title="Lifestyle Stories"
         categorySlug="lifestyle"
         categories={["lifestyle"]}
-        news={newsWithoutHero}
+        news={news}
       />
 
       <CategoryNewsSection
         title="Mythological Stories"
         categorySlug="dharma"
         categories={["dharma", "mystery"]}
-        news={newsWithoutHero}
+        news={news}
       />
 
       <DharmaSection news={news} />
