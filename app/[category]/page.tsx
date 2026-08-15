@@ -3,7 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import Footer from "@/components/Footer";
+
+type CategoryPost = {
+  title: string;
+  slug: { current: string };
+  mainImage?: unknown;
+  publishedAt: string;
+  category?: string;
+};
 
 const POSTS_PER_PAGE = 9;
 
@@ -14,6 +21,7 @@ const categoryMap: { [key: string]: string } = {
   "dharma": "dharma",
   "business": "business",
   "sports": "sports",
+  "others": "others",
   "lifestyle": "lifestyle", // Added lifestyle
   "videos": "videos"
 };
@@ -72,7 +80,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         {posts.length > 0 ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
-              {posts.map((story: any) => (
+              {posts.map((story: CategoryPost) => (
                 <Link href={`/news/${story.slug.current}`} key={story.slug.current} className="group h-full max-w-md mx-auto w-full">
                   
                   {/* FIX 2: Card background set to White (Light) / Dark Grey (Dark) */}
