@@ -43,6 +43,7 @@ async function getArticle(slug: string) {
       title,
       slug,
       mainImage,
+      gallery[]{ _key, asset, caption },
       youtubeUrl,
       body,
       publishedAt,
@@ -67,6 +68,28 @@ function getYouTubeId(url: string) {
 
 type Props = {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<import('next').Metadata> {
+  const { slug } = await params;
+  const post = await getArticle(slug);
+  if (!post) return {};
+  const imageUrl = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : "/logo.png";
+  return {
+    title: post.title,
+    description: post.title,
+    openGraph: {
+      title: post.title,
+      description: post.title,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      images: [imageUrl],
+    },
+  };
 }
 
 export default async function ArticlePage({ params }: Props) {
@@ -152,7 +175,31 @@ export default async function ArticlePage({ params }: Props) {
               </div>
             )}
 
-            {/* 2. SHOW VIDEO BELOW IMAGE (If it exists) */}
+            {/* 2. PHOTO GALLERY */}
+            {post.gallery && post.gallery.length > 0 && (
+              <div className="mb-6">
+                <h3 className="text-sm font-black uppercase tracking-wider text-tv10-red mb-3 border-b border-gray-200 dark:border-gray-700 pb-2">Photo Gallery</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {post.gallery.map((img: any) => (
+                    <div key={img._key} className="relative aspect-video rounded-lg overflow-hidden shadow-sm">
+                      <Image
+                        src={urlFor(img).url()}
+                        alt={img.caption || post.title}
+                        fill
+                        className="object-cover hover:scale-105 transition duration-500"
+                      />
+                      {img.caption && (
+                        <span className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] px-2 py-1 text-center">
+                          {img.caption}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 3. SHOW VIDEO BELOW IMAGE (If it exists) */
             {videoId && (
               <div className="w-full aspect-video mb-8 rounded-lg overflow-hidden shadow-md bg-black">
                 <iframe
