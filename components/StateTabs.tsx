@@ -70,12 +70,12 @@ export default function StateTabs({ news }: { news: any[] }) {
         </h3>
         
         {/* THE TABS */}
-        <div className="flex gap-2 overflow-x-auto w-full md:w-auto scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto w-full md:w-auto scrollbar-hide pb-1">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveState(tab.id)}
-              className={`px-6 py-2 rounded-full font-bold text-sm transition-all whitespace-nowrap border-2 ${
+              className={`px-5 py-2.5 rounded-full font-bold text-sm transition-all whitespace-nowrap border-2 ${
                 activeState === tab.id
                   ? "bg-tv10-red border-tv10-red text-white shadow-lg scale-105"
                   : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-500 hover:border-tv10-gold hover:text-tv10-gold"
