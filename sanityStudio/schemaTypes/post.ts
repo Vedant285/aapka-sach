@@ -49,6 +49,24 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'gallery',
+      title: 'Image Gallery (Multiple Images)',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'youtubeUrl',
       title: 'YouTube Video URL',
       type: 'url',
