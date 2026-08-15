@@ -199,7 +199,7 @@ export default async function ArticlePage({ params }: Props) {
               </div>
             )}
 
-            {/* 3. SHOW VIDEO BELOW IMAGE (If it exists) */
+            {/* 3. SHOW VIDEO BELOW IMAGE (If it exists) */}
             {videoId && (
               <div className="w-full aspect-video mb-8 rounded-lg overflow-hidden shadow-md bg-black">
                 <iframe
