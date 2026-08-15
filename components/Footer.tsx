@@ -25,7 +25,6 @@ export default function Footer() {
                </div>
                <div>
                  <h2 className="text-2xl font-black text-white leading-none tracking-tighter">AAPKA SACH</h2>
-                 <p className="text-[10px] text-tv10-gold font-bold uppercase tracking-widest">The Spiritual Voice</p>
                </div>
             </div>
             <p className="text-sm leading-relaxed text-gray-400 mb-6">
