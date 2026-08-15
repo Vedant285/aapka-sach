@@ -29,6 +29,24 @@ export default function StateTabs({ news }: { news: any[] }) {
       // Allows: "delhi", "Delhi NCR"
       match: ["delhi", "delhi ncr", "new delhi"] 
     },
+    {
+      id: "bihar",
+      label: "Bihar",
+      // Allows: "bihar", "Bihar News"
+      match: ["bihar", "bihar news"]
+    },
+    {
+      id: "haryana",
+      label: "Haryana",
+      // Allows: "haryana", "Haryana News"
+      match: ["haryana", "haryana news"]
+    },
+    {
+      id: "rajasthan",
+      label: "Rajasthan",
+      // Allows: "rajasthan", "Rajasthan News"
+      match: ["rajasthan", "rajasthan news"]
+    },
   ];
 
   // 1. Get the current active tab definition
