@@ -8,7 +8,7 @@ export default function Header() {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === "undefined") return false;
     return (
-      localStorage.getItem("theme")  === "dark" ||
+      localStorage.getItem("theme") === "dark" ||
       (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)
     );
   });
@@ -106,7 +106,7 @@ export default function Header() {
                 <Link 
                   href={linkUrl} 
                   onClick={() => setMenuOpen(false)} 
-                  className="block py-3 px-6 hover:bg-white hover:text-brand-red dark:hover:bg-[#333] dark:hover:text-brand-gold transition-all duration-300 uppercase tracking-wider text-center border-b border-blue-800 dark:border-gray-800 md:border-b-0"
+                  className="block py-3 px-4 whitespace-nowrap hover:bg-white hover:text-brand-red dark:hover:bg-[#333] dark:hover:text-brand-gold transition-all duration-300 uppercase tracking-wider text-center border-b border-blue-800 dark:border-gray-800 md:border-b-0"
                 >
                   {item}
                 </Link>
