@@ -67,41 +67,41 @@ export default function HeroSection({ news }: { news: HeroNewsItem[] }) {
         </div>
 
         {/* CENTER: MAIN TOP STORY */}
-        <div className="lg:col-span-6 group cursor-pointer relative">
+        <div className="lg:col-span-6 group cursor-pointer">
           <Link href={`/news/${mainStory.slug.current}`}>
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
-              {/* Image with Zoom Effect */}
-              {mainStory.mainImage && (
-                <Image
-                  src={urlFor(mainStory.mainImage).url()}
-                  alt={mainStory.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-              )}
-              
-              {/* Premium Gradient Overlay — only darkens bottom 40% where text sits */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+            <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800">
 
-              {/* Play Button */}
-              {mainStory.youtubeUrl && (
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-tv10-red/90 text-white rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm group-hover:scale-110 transition">
-                  <FaPlay className="ml-1 text-2xl" />
-                </div>
-              )}
-
-              {/* Text Content */}
-              <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full">
-                <span className="inline-block bg-tv10-gold text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-3 shadow-sm">
+              {/* Image — full width, no overlay */}
+              <div className="relative w-full aspect-video overflow-hidden">
+                {mainStory.mainImage && (
+                  <Image
+                    src={urlFor(mainStory.mainImage).url()}
+                    alt={mainStory.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                )}
+                {mainStory.youtubeUrl && (
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-tv10-red/90 text-white rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm group-hover:scale-110 transition">
+                    <FaPlay className="ml-1 text-xl" />
+                  </div>
+                )}
+                <span className="absolute top-3 left-3 bg-tv10-gold text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase shadow-sm">
                   {mainStory.category || "Breaking"}
                 </span>
-                <h1 className="text-2xl md:text-4xl font-extrabold text-white leading-tight drop-shadow-lg mb-2">
+              </div>
+
+              {/* Headline below image */}
+              <div className="p-5">
+                <h1 className="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white leading-snug group-hover:text-tv10-red transition-colors mb-3">
                   {mainStory.title}
                 </h1>
-                <div className="flex items-center text-gray-300 text-xs gap-3">
-                  <span className="flex items-center gap-1"><FaClock /> {mainStory.publishedAt ? new Date(mainStory.publishedAt).toDateString() : ""}</span>
+                <div className="flex items-center text-gray-500 text-xs gap-2">
+                  <FaClock />
+                  <span>{mainStory.publishedAt ? new Date(mainStory.publishedAt).toDateString() : ""}</span>
                 </div>
               </div>
+
             </div>
           </Link>
         </div>
