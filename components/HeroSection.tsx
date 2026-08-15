@@ -80,8 +80,8 @@ export default function HeroSection({ news }: { news: HeroNewsItem[] }) {
                 />
               )}
               
-              {/* Premium Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
+              {/* Premium Gradient Overlay — only darkens bottom 40% where text sits */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
               {/* Play Button */}
               {mainStory.youtubeUrl && (
