@@ -35,6 +35,7 @@ export default defineType({
           {title: 'Dharma', value: 'dharma'},
           {title: 'Business', value: 'business'},
           {title: 'Sports', value: 'sports'},
+          {title: 'Others', value: 'others'},
           {title: 'Videos', value: 'videos'},
           { title: 'Mystery (Adbhut)', value: 'mystery' },
           { title: 'Lifestyle', value: 'lifestyle' },
