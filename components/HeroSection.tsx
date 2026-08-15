@@ -3,11 +3,33 @@ import Link from "next/link";
 import { urlFor } from "../sanityStudio/lib/client";
 import { FaPlay, FaClock, FaBolt } from "react-icons/fa";
 
-export default function HeroSection({ news }: { news: any[] }) {
+type HeroNewsItem = {
+  _id?: string;
+  title: string;
+  slug: { current: string };
+  category?: string;
+  mainImage?: unknown;
+  youtubeUrl?: string;
+  publishedAt?: string;
+};
+
+export default function HeroSection({ news }: { news: HeroNewsItem[] }) {
   if (!news || news.length === 0) return null;
 
-  const mainStory = news[0];
-  const sideStories = news.slice(1, 5);
+  // Deduplicate by stable key so the same story does not appear in multiple columns.
+  const seen = new Set<string>();
+  const uniqueNews = news.filter((item) => {
+    const key = item._id || item.slug?.current || item.title;
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  const mainStory = uniqueNews[0];
+  const latestStories = uniqueNews.slice(1, 5);
+  const rightStories = uniqueNews.slice(5, 9);
+
+  if (!mainStory) return null;
 
   return (
     <section className="container mx-auto px-4 py-8">
@@ -20,10 +42,31 @@ export default function HeroSection({ news }: { news: any[] }) {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        {/* LEFT: MAIN STORY (Cinematic 8 Cols) */}
-        <div className="lg:col-span-8 group cursor-pointer relative">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        {/* LEFT: LATEST STORIES */}
+        <div className="lg:col-span-3 bg-white dark:bg-[#1a1a1a] rounded-2xl border border-gray-200 dark:border-gray-800 p-4 shadow-sm">
+          <h3 className="text-sm font-black uppercase tracking-wider text-tv10-red mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+            Latest
+          </h3>
+          <div className="space-y-3">
+            {latestStories.map((story) => (
+              <Link href={`/news/${story.slug.current}`} key={story.slug.current}>
+                <div className="group rounded-lg p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  <h4 className="text-sm font-bold text-gray-900 dark:text-white leading-snug line-clamp-2 group-hover:text-tv10-red transition-colors">
+                    {story.title}
+                  </h4>
+                  <span className="text-[10px] text-gray-500 font-semibold uppercase mt-1 inline-flex items-center gap-1">
+                    <FaBolt className="text-tv10-gold" /> {story.category}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* CENTER: MAIN TOP STORY */}
+        <div className="lg:col-span-6 group cursor-pointer relative">
           <Link href={`/news/${mainStory.slug.current}`}>
             <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
               {/* Image with Zoom Effect */}
@@ -62,14 +105,13 @@ export default function HeroSection({ news }: { news: any[] }) {
           </Link>
         </div>
 
-        {/* RIGHT: SIDE STORIES (Clean List 4 Cols) */}
-        <div className="lg:col-span-4 flex flex-col justify-between h-full space-y-4 lg:space-y-0">
-          {sideStories.map((story) => (
-            <Link href={`/news/${story.slug.current}`} key={story.slug.current} className="flex-1">
-              <div className="flex gap-4 items-start group p-3 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-colors border border-transparent hover:border-gray-200 dark:hover:border-gray-700">
-                
-                {/* Thumbnail (Fixed Size) */}
-                <div className="relative w-24 h-24 md:w-32 md:h-20 flex-shrink-0 rounded-lg overflow-hidden shadow-sm">
+        {/* RIGHT: MORE STORIES */}
+        <div className="lg:col-span-3 flex flex-col gap-3">
+          {rightStories.map((story) => (
+            <Link href={`/news/${story.slug.current}`} key={story.slug.current}>
+              <div className="flex gap-3 items-start group p-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-gray-800 hover:shadow-md transition">
+
+                <div className="relative w-24 h-16 flex-shrink-0 rounded-md overflow-hidden bg-gray-200 dark:bg-gray-800">
                   {story.mainImage && (
                     <Image
                       src={urlFor(story.mainImage).url()}
@@ -85,21 +127,23 @@ export default function HeroSection({ news }: { news: any[] }) {
                   )}
                 </div>
 
-                {/* Headline */}
-                <div className="flex flex-col justify-center h-full">
-                   <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white leading-snug group-hover:text-tv10-red line-clamp-2">
-                     {story.title}
-                   </h3>
-                   <span className="text-[10px] font-bold text-gray-500 mt-2 uppercase flex items-center gap-1">
-                     <FaBolt className="text-tv10-gold" /> {story.category}
-                   </span>
+                <div>
+                  <h3 className="text-sm font-bold text-gray-900 dark:text-white leading-snug line-clamp-2 group-hover:text-tv10-red transition-colors">
+                    {story.title}
+                  </h3>
+                  <span className="text-[10px] text-gray-500 font-semibold mt-1 inline-block uppercase">
+                    {story.category}
+                  </span>
                 </div>
 
               </div>
-              {/* Divider Line */}
-              <div className="h-[1px] bg-gray-100 dark:bg-gray-800 mx-3 my-1 lg:hidden"></div>
             </Link>
           ))}
+          {rightStories.length === 0 && (
+            <div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-900/40 border border-dashed border-gray-200 dark:border-gray-700 text-xs text-gray-500 font-semibold">
+              More unique stories will appear here as new posts are added.
+            </div>
+          )}
         </div>
 
       </div>
