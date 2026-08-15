@@ -53,13 +53,25 @@ export default function HeroSection({ news }: { news: HeroNewsItem[] }) {
           <div className="space-y-3">
             {latestStories.map((story) => (
               <Link href={`/news/${story.slug.current}`} key={story.slug.current}>
-                <div className="group rounded-lg p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                  <h4 className="text-sm font-bold text-gray-900 dark:text-white leading-snug line-clamp-2 group-hover:text-tv10-red transition-colors">
-                    {story.title}
-                  </h4>
-                  <span className="text-[10px] text-gray-500 font-semibold uppercase mt-1 inline-flex items-center gap-1">
-                    <FaBolt className="text-tv10-gold" /> {story.category}
-                  </span>
+                <div className="group flex gap-3 items-start rounded-lg p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  <div className="relative w-20 h-14 flex-shrink-0 rounded-md overflow-hidden bg-gray-200 dark:bg-gray-800">
+                    {story.mainImage && (
+                      <Image
+                        src={urlFor(story.mainImage).url()}
+                        alt={story.title}
+                        fill
+                        className="object-cover"
+                      />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-xs font-bold text-gray-900 dark:text-white leading-snug line-clamp-2 group-hover:text-tv10-red transition-colors">
+                      {story.title}
+                    </h4>
+                    <span className="text-[10px] text-gray-500 font-semibold uppercase mt-1 inline-flex items-center gap-1">
+                      <FaBolt className="text-tv10-gold" /> {story.category}
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
