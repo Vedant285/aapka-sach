@@ -8,7 +8,8 @@ type NewsItem = {
   title?: string;
   slug?: { current?: string };
   category?: string;
-  mainImage?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mainImage?: any;
   publishedAt?: string;
 };
 
