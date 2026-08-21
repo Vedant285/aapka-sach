@@ -8,7 +8,7 @@ import { structure } from './structure'
 
 export default defineConfig({
   name: 'default',
-  title: 'Aapka Sach Admin',
+  title: 'Aaj Ka Sach Admin',
   basePath: '/studio',
   projectId: 'g1o8uwxq', 
   dataset: 'production',
