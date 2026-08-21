@@ -99,6 +99,8 @@ export default async function ArticlePage({ params }: Props) {
   if (!post) return <div className="p-20 text-center">Loading...</div>;
 
   const videoId = post.youtubeUrl ? getYouTubeId(post.youtubeUrl) : null;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aapkasach.in";
+  const articleUrl = `${siteUrl}/news/${post.slug.current}`;
 
   return (
     <main className="bg-[#f4f4f4] dark:bg-black min-h-screen text-gray-900 dark:text-gray-100 font-sans">
@@ -153,7 +155,7 @@ export default async function ArticlePage({ params }: Props) {
                </div>
                <div className="flex gap-2">
                  <a 
-                    href={`https://wa.me/?text=${encodeURIComponent(post.title + " " + (typeof window !== 'undefined' ? window.location.href : ''))}`}
+                    href={`https://wa.me/?text=${encodeURIComponent(post.title + "\n\n" + articleUrl)}`}
                     target="_blank"
                     className="bg-[#25D366] text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 hover:bg-green-600 transition"
                  >
@@ -228,7 +230,7 @@ export default async function ArticlePage({ params }: Props) {
             <div className="bg-tv10-red text-white p-4 rounded-xl shadow-md text-center">
               <div className="flex justify-center items-center gap-2 mb-2">
                 <FaYoutube className="text-2xl" />
-                <span className="font-bold">AAPKA SACH</span>
+                <span className="font-bold">AAJ KA SACH</span>
               </div>
               <p className="text-xs mb-3 opacity-90">Join 10,000+ Subscribers</p>
               <a href="https://www.youtube.com/@TV10India" target="_blank" className="block w-full bg-white text-tv10-red text-xs font-black px-4 py-2 rounded-full hover:bg-gray-100 transition">
