@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"; 
 import "./globals.css";
-import Header from "@/components/Header"; // ✅ Import Globally
-import Footer from "@/components/Footer"; // ✅ Import Globally
+import Header from "@/components/Header"; 
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://aapkasach.in"),
-  title: "Aapka Sach - The True Voice of Bharat",
+  title: "Aaj Ka Sach - The True Voice of Bharat",
   description: "Latest news, updates, and stories from India.",
   openGraph: {
-    title: "Aapka Sach - The True Voice of Bharat",
+    title: "Aaj Ka Sach - The True Voice of Bharat",
     description: "Latest news, updates, and stories from India.",
-    images: [{ url: "/logo.png", width: 512, height: 512, alt: "Aapka Sach" }],
+    images: [{ url: "/logo.png", width: 512, height: 512, alt: "Aaj Ka Sach" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aapka Sach - The True Voice of Bharat",
+    title: "Aaj Ka Sach - The True Voice of Bharat",
     description: "Latest news, updates, and stories from India.",
     images: ["/logo.png"],
   },
