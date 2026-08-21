@@ -1,4 +1,5 @@
-import { client, urlFor } from "../../sanityStudio/lib/sanity"; 
+import { client, urlFor } from "../../sanityStudio/lib/sanity"; // Check path if needed
+import NextImage from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -88,7 +89,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
                     {/* Image Container */}
                     <div className="relative w-full aspect-video overflow-hidden bg-gray-200 dark:bg-gray-800">
                       {story.mainImage ? (
-                        <Image
+                        <NextImage
                           src={urlFor(story.mainImage).url()}
                           alt={story.title}
                           fill
