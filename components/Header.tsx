@@ -52,15 +52,7 @@ export default function Header() {
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-3">
           <div className="h-14 w-14 md:h-16 md:w-16 relative shrink-0">
-             <img src="/logo.png" alt="Aapka Sach" className="object-contain w-full h-full drop-shadow-lg" />
-          </div>
-          <div className="flex flex-col justify-center leading-none">
-            <div className="bg-gradient-to-r from-brand-red to-red-600 text-white font-black text-xl md:text-3xl px-2 py-0.5 rounded-sm transform -skew-x-12 shadow-md inline-block w-fit mb-1">
-               AAPKA
-            </div>
-            <div className="bg-gradient-to-r from-brand-blue to-blue-800 dark:from-gray-700 dark:to-gray-800 text-white font-black text-2xl md:text-4xl px-2 py-0.5 rounded-sm transform -skew-x-12 shadow-md ml-4 border border-white/20">
-               SACH
-            </div>
+             <img src="/logo.png" alt="Aaj Ka Sach" className="object-contain w-full h-full drop-shadow-lg" />
           </div>
         </Link>
 
