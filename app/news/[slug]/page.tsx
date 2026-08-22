@@ -74,8 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<import('next'
   const { slug } = await params;
   const post = await getArticle(slug);
   if (!post) return {};
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-    || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://aajkasach.com");
+  const siteUrl = "https://aajkasach.com";
   const articleUrl = `${siteUrl}/news/${post.slug.current}`;
   const imageUrl = post.mainImage
     ? urlFor(post.mainImage).width(1200).height(630).url()
@@ -106,8 +105,7 @@ export default async function ArticlePage({ params }: Props) {
   if (!post) return <div className="p-20 text-center">Loading...</div>;
 
   const videoId = post.youtubeUrl ? getYouTubeId(post.youtubeUrl) : null;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-    || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://aajkasach.com");
+  const siteUrl = "https://aajkasach.com";
   const articleUrl = `${siteUrl}/news/${post.slug.current}`;
 
   return (
