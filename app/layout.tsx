@@ -2,25 +2,27 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google"; 
 import "./globals.css";
 import Header from "@/components/Header"; 
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer"; 
 
 const inter = Inter({ subsets: ["latin"] });
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://aajkasach.com");
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://aapkasach.in"),
+  metadataBase: new URL(siteUrl),
   title: "Aaj Ka Sach - The True Voice of Bharat",
   description: "Latest news, updates, and stories from India.",
   openGraph: {
     title: "Aaj Ka Sach - The True Voice of Bharat",
     description: "Latest news, updates, and stories from India.",
-    images: [{ url: "/logo.png", width: 512, height: 512, alt: "Aaj Ka Sach" }],
+    images: [{ url: `${siteUrl}/logo.png`, width: 512, height: 512, alt: "Aaj Ka Sach" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Aaj Ka Sach - The True Voice of Bharat",
     description: "Latest news, updates, and stories from India.",
-    images: ["/logo.png"],
+    images: [`${siteUrl}/logo.png`],
   },
 };
 
