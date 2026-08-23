@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaSearch, FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
+import LanguageToggle from "@/components/LanguageToggle";
 
 export default function Header() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -76,6 +77,7 @@ export default function Header() {
             />
             <FaSearch className="text-brand-blue dark:text-white" />
           </div>
+          <LanguageToggle />
           <button 
             onClick={toggleTheme} 
             className="p-2.5 rounded-full bg-gray-50 dark:bg-[#333] text-brand-blue dark:text-yellow-400 hover:bg-brand-blue hover:text-white transition shadow-sm shrink-0 border border-gray-200 dark:border-gray-600"
