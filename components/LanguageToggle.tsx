@@ -1,25 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function getLanguageFromCookie(): "hi" | "en" {
+function getSavedLanguage(): "hi" | "en" {
   if (typeof document === "undefined") return "hi";
 
   const savedLanguage = localStorage.getItem("aaj-ka-sach-language");
   if (savedLanguage === "hi" || savedLanguage === "en") return savedLanguage;
-
-  const cookies = document.cookie.split(";");
-  const langCookie = cookies.find((cookie) => cookie.trim().startsWith("googtrans="));
-  return langCookie?.split("/").pop() === "en" ? "en" : "hi";
+  return "hi";
 }
 
 export default function LanguageToggle() {
-  const [currentLang, setCurrentLang] = useState<"hi" | "en">(getLanguageFromCookie);
-
-  useEffect(() => {
-    const timeoutId = window.setTimeout(() => setCurrentLang(getLanguageFromCookie()), 0);
-    return () => window.clearTimeout(timeoutId);
-  }, []);
+  const [currentLang, setCurrentLang] = useState<"hi" | "en">(getSavedLanguage);
 
   const switchLanguage = (lang: "hi" | "en") => {
     setCurrentLang(lang);
