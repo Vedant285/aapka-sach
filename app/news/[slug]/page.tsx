@@ -4,7 +4,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Link from "next/link";
 import AdBanner from "@/components/AdBanner"; 
-import { FaYoutube, FaWhatsapp, FaClock, FaFire, FaLayerGroup } from "react-icons/fa";
+import { FaWhatsapp, FaClock, FaFire, FaLayerGroup } from "react-icons/fa";
 
 // 1. RICH TEXT STYLING
 const RichTextComponents = {
@@ -231,18 +231,6 @@ export default async function ArticlePage({ params }: Props) {
           <aside className="lg:col-span-3 space-y-6">
             
             <AdBanner />
-
-            {/* Subscribe Box */}
-            <div className="bg-tv10-red text-white p-4 rounded-xl shadow-md text-center">
-              <div className="flex justify-center items-center gap-2 mb-2">
-                <FaYoutube className="text-2xl" />
-                <span className="font-bold">AAJ KA SACH</span>
-              </div>
-              <p className="text-xs mb-3 opacity-90">Join 10,000+ Subscribers</p>
-              <a href="https://www.youtube.com/@TV10India" target="_blank" className="block w-full bg-white text-tv10-red text-xs font-black px-4 py-2 rounded-full hover:bg-gray-100 transition">
-                SUBSCRIBE NOW
-              </a>
-            </div>
 
             <AdBanner />
 
