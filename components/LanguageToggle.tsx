@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function getSavedLanguage(): "hi" | "en" {
   if (typeof document === "undefined") return "hi";
@@ -12,6 +12,14 @@ function getSavedLanguage(): "hi" | "en" {
 
 export default function LanguageToggle() {
   const [currentLang, setCurrentLang] = useState<"hi" | "en">(getSavedLanguage);
+
+  useEffect(() => {
+    const syncLanguage = window.setTimeout(() => {
+      setCurrentLang(getSavedLanguage());
+    }, 0);
+
+    return () => window.clearTimeout(syncLanguage);
+  }, []);
 
   const switchLanguage = (lang: "hi" | "en") => {
     setCurrentLang(lang);
