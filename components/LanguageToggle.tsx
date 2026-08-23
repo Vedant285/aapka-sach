@@ -19,13 +19,15 @@ export default function LanguageToggle() {
     }
   }, []);
 
-  const switchLanguage = (lang: string) => {
-    // 1. Set the special Google Cookie
-    // We set it for both root path and domain to ensure it sticks
-    document.cookie = `googtrans=/auto/${lang}; path=/;`;
-    document.cookie = `googtrans=/auto/${lang}; path=/; domain=${window.location.hostname}`;
+  const switchLanguage = (lang: "hi" | "en") => {
+    if (lang === "hi") {
+      document.cookie = "googtrans=; path=/; max-age=0";
+      document.cookie = `googtrans=; path=/; domain=${window.location.hostname}; max-age=0`;
+    } else {
+      document.cookie = "googtrans=/hi/en; path=/";
+      document.cookie = `googtrans=/hi/en; path=/; domain=${window.location.hostname}`;
+    }
 
-    // 2. Reload the page to apply translation
     window.location.reload();
   };
 
