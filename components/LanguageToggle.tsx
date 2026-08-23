@@ -1,34 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+function getLanguageFromCookie(): "hi" | "en" {
+  if (typeof document === "undefined") return "hi";
+
+  const savedLanguage = localStorage.getItem("aaj-ka-sach-language");
+  if (savedLanguage === "hi" || savedLanguage === "en") return savedLanguage;
+
+  const cookies = document.cookie.split(";");
+  const langCookie = cookies.find((cookie) => cookie.trim().startsWith("googtrans="));
+  return langCookie?.split("/").pop() === "en" ? "en" : "hi";
+}
 
 export default function LanguageToggle() {
-  const [currentLang, setCurrentLang] = useState("hi");
+  const [currentLang, setCurrentLang] = useState<"hi" | "en">(getLanguageFromCookie);
 
   useEffect(() => {
-    // Check the cookie to see what the current language is
-    const cookies = document.cookie.split(";");
-    const langCookie = cookies.find((c) => c.trim().startsWith("googtrans="));
-    
-    if (langCookie) {
-      // Example value: /auto/en -> We extract 'en'
-      const langCode = langCookie.split("/").pop();
-      if (langCode === "en") {
-        setCurrentLang("en");
-      }
-    }
+    const timeoutId = window.setTimeout(() => setCurrentLang(getLanguageFromCookie()), 0);
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   const switchLanguage = (lang: "hi" | "en") => {
+    setCurrentLang(lang);
+    localStorage.setItem("aaj-ka-sach-language", lang);
+
     if (lang === "hi") {
-      document.cookie = "googtrans=; path=/; max-age=0";
-      document.cookie = `googtrans=; path=/; domain=${window.location.hostname}; max-age=0`;
+      const expiry = "expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      const rootDomain = window.location.hostname.split(".").slice(-2).join(".");
+
+      document.cookie = `googtrans=; path=/; ${expiry}`;
+      document.cookie = `googtrans=; path=/; domain=${window.location.hostname}; ${expiry}`;
+      document.cookie = `googtrans=; path=/; domain=.${rootDomain}; ${expiry}`;
     } else {
       document.cookie = "googtrans=/hi/en; path=/";
       document.cookie = `googtrans=/hi/en; path=/; domain=${window.location.hostname}`;
     }
 
-    window.location.reload();
+    window.location.replace(`${window.location.pathname}${window.location.search}${window.location.hash}`);
   };
 
   return (
