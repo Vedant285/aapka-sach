@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google"; 
 import "./globals.css";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer"; 
+import GoogleTranslateScript from "@/components/GoogleTranslateScript";
 
 const inter = Inter({ subsets: ["latin"] });
 const siteUrl = "https://aajkasach.com";
@@ -36,7 +37,7 @@ export default function RootLayout({
          2. Flex Column layout ensures Footer stays at bottom
       */}
       <body className={`${inter.className} bg-white dark:bg-[#0f0f0f] text-black dark:text-white transition-colors duration-300 flex flex-col min-h-screen`}>
-        
+        <GoogleTranslateScript />
         
         {/* MAIN CONTENT (This is where page.tsx, [slug], etc. are injected) */}
         <div className="flex-grow">
