@@ -24,6 +24,12 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'includeInEpaper',
+      title: 'Include in E-Paper',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
