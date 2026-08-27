@@ -1,11 +1,22 @@
 "use client";
 
-import { useState, useEffect, useSyncExternalStore } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaSearch, FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
 import LanguageToggle from "@/components/LanguageToggle";
-import { getStoredLocale, subscribeToLanguage, translations, type Locale } from "../lib/translations";
+
+const menuItems = [
+  "HOME",
+  "UTTAR PRADESH",
+  "UTTARAKHAND",
+  "DELHI",
+  "DHARMA",
+  "BUSINESS",
+  "SPORTS",
+  "LIFESTYLE",
+  "OTHERS",
+];
 
 export default function Header() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -17,8 +28,6 @@ export default function Header() {
   });
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  const locale = useSyncExternalStore(subscribeToLanguage, getStoredLocale, () => "hi") as Locale;
-  const t = translations[locale];
 
   const today = new Date().toLocaleDateString('en-IN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
@@ -33,8 +42,6 @@ export default function Header() {
   const toggleTheme = () => {
     setDarkMode((prev) => !prev);
   };
-
-  const menuItems = t.nav;
 
   return (
     <header className="sticky top-0 z-50 shadow-lg font-sans">
@@ -62,10 +69,10 @@ export default function Header() {
 
         {/* CENTER: tagline + live badge */}
         <div className="hidden lg:flex flex-col items-center gap-1">
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">{t.slogan}</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">Bharat Ka Sachcha Samachar</span>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse inline-block"></span>
-            <span className="text-xs font-black text-brand-red uppercase tracking-widest">{t.liveUpdates}</span>
+            <span className="text-xs font-black text-brand-red uppercase tracking-widest">Live Updates 24/7</span>
             <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse inline-block"></span>
           </div>
         </div>
@@ -76,7 +83,7 @@ export default function Header() {
             <input 
               type="text" 
               name="q"
-              placeholder={t.search} 
+              placeholder="Search" 
               className="bg-transparent outline-none text-sm text-gray-900 dark:text-white w-28 focus:w-44 transition-all font-bold placeholder-gray-500 dark:placeholder-gray-400"
             />
             <button type="submit" aria-label="Search" className="text-brand-blue dark:text-white"><FaSearch /></button>
@@ -99,7 +106,7 @@ export default function Header() {
         <ul className="container mx-auto flex flex-col md:flex-row md:justify-center">
           {menuItems.map((item) => {
             const normalizedItem = item.toUpperCase();
-            const linkUrl = normalizedItem === 'HOME' || normalizedItem === 'होम' ? '/' : `/${normalizedItem.toLowerCase().replace(/ /g, '-')}`;
+            const linkUrl = normalizedItem === 'HOME' ? '/' : `/${normalizedItem.toLowerCase().replace(/ /g, '-')}`;
             const isActive = pathname === linkUrl;
             return (
               <li key={item}>
