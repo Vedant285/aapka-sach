@@ -4,9 +4,17 @@
 
 /* 1. GLOBAL RESET & THEME COLORS */
 @layer base {
+  html {
+    background-color: #fafafa;
+    min-height: 100%;
+    overscroll-behavior-y: none;
+  }
+
   /* LIGHT MODE DEFAULT */
   body {
     @apply bg-[#FAFAFA] text-[#1A1A1A] transition-colors duration-300;
+    min-height: 100vh;
+    overscroll-behavior-y: none;
   }
 
   /* DARK MODE DEFAULT - Forces Text to be White */
