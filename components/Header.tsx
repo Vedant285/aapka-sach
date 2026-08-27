@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaSearch, FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
 import LanguageToggle from "@/components/LanguageToggle";
-import { getStoredLocale, subscribeToLanguage, translations, type Locale } from "@/lib/translations";
+import { getStoredLocale, subscribeToLanguage, translations, type Locale } from "../lib/translations";
 
 export default function Header() {
   const [darkMode, setDarkMode] = useState(() => {
