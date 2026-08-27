@@ -1,37 +1,17 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-
-const LANGUAGE_CHANGE_EVENT = "aaj-ka-sach-language-change";
-
-function getSavedLanguage(): "hi" | "en" {
-  if (typeof document === "undefined") return "hi";
-
-  const savedLanguage = localStorage.getItem("aaj-ka-sach-language");
-  if (savedLanguage === "hi" || savedLanguage === "en") return savedLanguage;
-  return "hi";
-}
-
-function subscribeToLanguage(callback: () => void) {
-  window.addEventListener("storage", callback);
-  window.addEventListener(LANGUAGE_CHANGE_EVENT, callback);
-
-  return () => {
-    window.removeEventListener("storage", callback);
-    window.removeEventListener(LANGUAGE_CHANGE_EVENT, callback);
-  };
-}
+import { getStoredLocale, setStoredLocale, subscribeToLanguage, type Locale } from "@/lib/translations";
 
 export default function LanguageToggle() {
   const currentLang = useSyncExternalStore(
     subscribeToLanguage,
-    getSavedLanguage,
+    getStoredLocale,
     () => "hi"
-  );
+  ) as Locale;
 
-  const switchLanguage = (lang: "hi" | "en") => {
-    localStorage.setItem("aaj-ka-sach-language", lang);
-    window.dispatchEvent(new Event(LANGUAGE_CHANGE_EVENT));
+  const switchLanguage = (lang: Locale) => {
+    setStoredLocale(lang);
 
     if (lang === "hi") {
       const expiry = "expires=Thu, 01 Jan 1970 00:00:00 GMT";
