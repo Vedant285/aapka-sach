@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { getStoredLocale, setStoredLocale, subscribeToLanguage, type Locale } from "@/lib/translations";
+import { getStoredLocale, setStoredLocale, subscribeToLanguage, type Locale } from "../lib/translations";
 
 export default function LanguageToggle() {
   const currentLang = useSyncExternalStore(
@@ -13,7 +13,7 @@ export default function LanguageToggle() {
   const switchLanguage = (lang: Locale) => {
     setStoredLocale(lang);
 
-    if (lang === "hi") {
+    if (lang === "en") {
       const expiry = "expires=Thu, 01 Jan 1970 00:00:00 GMT";
       const rootDomain = window.location.hostname.split(".").slice(-2).join(".");
 
@@ -21,8 +21,8 @@ export default function LanguageToggle() {
       document.cookie = `googtrans=; path=/; domain=${window.location.hostname}; ${expiry}`;
       document.cookie = `googtrans=; path=/; domain=.${rootDomain}; ${expiry}`;
     } else {
-      document.cookie = "googtrans=/hi/en; path=/";
-      document.cookie = `googtrans=/hi/en; path=/; domain=${window.location.hostname}`;
+      document.cookie = "googtrans=/en/hi; path=/";
+      document.cookie = `googtrans=/en/hi; path=/; domain=${window.location.hostname}`;
     }
 
     window.location.replace(`${window.location.pathname}${window.location.search}${window.location.hash}`);
